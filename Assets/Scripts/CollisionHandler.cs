@@ -6,6 +6,15 @@ public class CollisionHandler : MonoBehaviour
 
     [SerializeField] float loadingDelay;
 
+    [SerializeField] AudioClip winNoise;
+    [SerializeField] AudioClip crashNoise;
+
+    AudioSource myAudioSource;
+
+    void Start() {
+        myAudioSource = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter(Collision other) 
     {
         switch (other.gameObject.tag)
@@ -28,27 +37,27 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()   // Disable movement and reload the level
     {
-        //Add sfx
+        myAudioSource.PlayOneShot(crashNoise);
         //Add Particles
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", loadingDelay);  // String method name ref's are passed to Invoke, which is a bit loose bhole brah
     }
 
-    void StartSuccessSequence()
+    void StartSuccessSequence() // Sequence to run when player reaches landing pad
     {
-        //Add sfx
+        myAudioSource.PlayOneShot(winNoise);
         //Add Particles
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", loadingDelay);        
     }
 
-    void ReloadLevel()
+    void ReloadLevel()  // Reloads the current level
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex); 
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;   // Grab the current scenes index
+        SceneManager.LoadScene(currentSceneIndex);  // Load scene with the index grabbed above
     }
 
-    void LoadNextLevel()
+    void LoadNextLevel()    // Loads the next level in the build manager
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;

@@ -10,8 +10,12 @@ public class Movement : MonoBehaviour
     [SerializeField] KeyCode inputRight;
 
     // Thrust values set in unity inspector
-    [SerializeField] float mainThrust = 10f;
+    [SerializeField] float mainThrust = 10f;    // Default value, not really needed
     [SerializeField] float sideThrust = 0.3f;
+
+    //Audio variables set in unity
+    [SerializeField] AudioClip mainThrusterFX;
+    [SerializeField] AudioClip sideThrusterFX;  // Not figured out how to implement this sound... sound glitchy when on first attempt
 
     Rigidbody rb;
 
@@ -42,7 +46,7 @@ public class Movement : MonoBehaviour
             
             if (!audioPlaying)  // Only play the audio if it is not playing
             {
-                myAudioSource.Play();
+                myAudioSource.PlayOneShot(mainThrusterFX);
                 audioPlaying = true;
             }
         }
@@ -57,15 +61,17 @@ public class Movement : MonoBehaviour
     void ProcessRotation()
     {
 
-        if(Input.GetKey(inputLeft) && Input.GetKey(inputRight) == false)
-        {
-            ApplyRotation(sideThrust); // rotate left
-        }
+            if(Input.GetKey(inputLeft) && Input.GetKey(inputRight) == false)
+            {
+                ApplyRotation(sideThrust); // rotate left
+                //myAudioSource.PlayOneShot(sideThrusterFX);
+            }
 
-        if (Input.GetKey(inputRight) && Input.GetKey(inputLeft) == false)
-        {
-            ApplyRotation(- sideThrust); // rotate right
-        }
+            if (Input.GetKey(inputRight) && Input.GetKey(inputLeft) == false)
+            {
+                ApplyRotation(- sideThrust); // rotate right
+                //myAudioSource.PlayOneShot(sideThrusterFX);
+            }
 
     }
 

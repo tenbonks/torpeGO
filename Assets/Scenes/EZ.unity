@@ -965,6 +965,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1730941485, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
+      propertyPath: winNoise
+      value: 
+      objectReference: {fileID: 8300000, guid: c2cf494af660aa34688603d27dddb15f, type: 3}
+    - target: {fileID: 1730941485, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
+      propertyPath: crashNoise
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e093e15069a72f458e7db6c0202ad36, type: 3}
+    - target: {fileID: 1730941485, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
+      propertyPath: mainThrusterFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 13fe22c89a5df244fac5e1c08a7381eb, type: 3}
+    - target: {fileID: 1730941485, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
+      propertyPath: sideThrusterFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 4cb76ab2bd4be804283ebbb060bcb678, type: 3}
     - target: {fileID: 3702060077213025512, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1008,10 +1024,6 @@ PrefabInstance:
     - target: {fileID: 3702060077213025512, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044224854585122243, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
-      propertyPath: loadingDelay
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7033851011964022614, guid: 811639d6c0fa0c244875b30943fffa5a, type: 3}
       propertyPath: m_Name

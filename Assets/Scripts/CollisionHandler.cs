@@ -11,12 +11,17 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource myAudioSource;
 
+    bool isTransitioning = false;
+
     void Start() {
         myAudioSource = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision other) 
     {
+
+        if (isTransitioning) {return;} // Return will not run any code below this point
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -37,7 +42,11 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()   // Disable movement and reload the level
     {
+        myAudioSource.Stop();
         myAudioSource.PlayOneShot(crashNoise);
+
+        isTransitioning = true;
+
         //Add Particles
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", loadingDelay);  // String method name ref's are passed to Invoke, which is a bit loose bhole brah
@@ -45,7 +54,12 @@ public class CollisionHandler : MonoBehaviour
 
     void StartSuccessSequence() // Sequence to run when player reaches landing pad
     {
+
+        myAudioSource.Stop();
         myAudioSource.PlayOneShot(winNoise);
+
+        isTransitioning = true; // This defaults to first, so when the level is reloaded it will be set back
+
         //Add Particles
         GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", loadingDelay);        
@@ -53,12 +67,19 @@ public class CollisionHandler : MonoBehaviour
 
     void ReloadLevel()  // Reloads the current level
     {
+        
+        isTransitioning = false;
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;   // Grab the current scenes index
+
         SceneManager.LoadScene(currentSceneIndex);  // Load scene with the index grabbed above
     }
 
     void LoadNextLevel()    // Loads the next level in the build manager
     {
+
+        isTransitioning = false;
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 

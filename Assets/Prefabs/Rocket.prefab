@@ -132,6 +132,7 @@ MonoBehaviour:
   inputRight: 100
   mainThrust: 1150
   sideThrust: 100
+  mainThrusterFX: {fileID: 8300000, guid: 13fe22c89a5df244fac5e1c08a7381eb, type: 3}
 --- !u!82 &28084898
 AudioSource:
   m_ObjectHideFlags: 0
@@ -241,3 +242,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingDelay: 3
+  winNoise: {fileID: 8300000, guid: c2cf494af660aa34688603d27dddb15f, type: 3}
+  crashNoise: {fileID: 8300000, guid: 0e093e15069a72f458e7db6c0202ad36, type: 3}

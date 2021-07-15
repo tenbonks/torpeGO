@@ -9,18 +9,22 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip winNoise;
     [SerializeField] AudioClip crashNoise;
 
-    AudioSource myAudioSource;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
+
+    AudioSource audioSource;
+    
 
     bool isTransitioning = false;
 
     void Start() {
-        myAudioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision other) 
     {
 
-        if (isTransitioning) {return;} // Return will not run any code below this point
+        if (isTransitioning) {return;} //  if the player is in a transitioning state, ignore collisions
 
         switch (other.gameObject.tag)
         {
@@ -30,9 +34,6 @@ public class CollisionHandler : MonoBehaviour
             case "Finish":
                 StartSuccessSequence();
                 break;
-            // case "Fuel":
-            //     Debug.Log("Refuel");
-            //     break;
             default:
                 StartCrashSequence();
                 break;
@@ -42,8 +43,11 @@ public class CollisionHandler : MonoBehaviour
 
     void StartCrashSequence()   // Disable movement and reload the level
     {
-        myAudioSource.Stop();
-        myAudioSource.PlayOneShot(crashNoise);
+        
+        audioSource.Stop();
+        audioSource.PlayOneShot(crashNoise);
+        
+        crashParticles.Play();
 
         isTransitioning = true;
 
@@ -55,8 +59,10 @@ public class CollisionHandler : MonoBehaviour
     void StartSuccessSequence() // Sequence to run when player reaches landing pad
     {
 
-        myAudioSource.Stop();
-        myAudioSource.PlayOneShot(winNoise);
+        audioSource.Stop();
+        audioSource.PlayOneShot(winNoise);
+
+        successParticles.Play();
 
         isTransitioning = true; // This defaults to first, so when the level is reloaded it will be set back
 

@@ -59,16 +59,16 @@ public class Movement : MonoBehaviour
 
     void ProcessRotation()
     {
+                    
+        if(Input.GetKey(inputLeft) && Input.GetKey(inputRight) == false)
+        {
+            ApplyRotation(sideThrust); // rotate left
+        }
 
-            if(Input.GetKey(inputLeft) && Input.GetKey(inputRight) == false)
-            {
-                ApplyRotation(sideThrust); // rotate left
-            }
-
-            if (Input.GetKey(inputRight) && Input.GetKey(inputLeft) == false)
-            {
-                ApplyRotation(- sideThrust); // rotate right
-            }
+        if (Input.GetKey(inputRight) && Input.GetKey(inputLeft) == false)
+        {
+            ApplyRotation(- sideThrust); // rotate right
+        }
 
     }
 

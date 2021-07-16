@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/EZ.unity
     guid: 2ad79ffe5b8289c49b292c9bdaf31e98
   - enabled: 1
-    path: Assets/Scenes/bit less EZ.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/EZ 2.unity
+    guid: 8beadf40e396a764a9c31291dbbee940
   m_configObjects: {}

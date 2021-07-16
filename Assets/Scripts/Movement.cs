@@ -15,6 +15,12 @@ public class Movement : MonoBehaviour
 
     //Audio variables set in unity
     [SerializeField] AudioClip mainThrusterFX;
+
+    // Particle Vars
+    [SerializeField] ParticleSystem boosterParticles;
+    [SerializeField] ParticleSystem leftThrustParticles;
+    [SerializeField] ParticleSystem rightThrustParticles;
+
     
     Rigidbody rb;
 
@@ -41,18 +47,11 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(inputThrust))
         {
-            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime); // Vector3.up shorthand for 0, 1, 0
-            
-            if (!audioPlaying)  // Only play the audio if it is not playing
-            {
-                myAudioSource.PlayOneShot(mainThrusterFX);
-                audioPlaying = true;
-            }
+            startThrusting();   // Apply force, play main thrust audio, play particle FX
         }
         else    // Stop the audio and dont apply any force, as thrust is no longer being held down
         {
-            myAudioSource.Stop();
-            audioPlaying = false;
+            stopThrusting();    // Stop all the thrusting audio and FX, no force will be applied 
         }
 
     }
@@ -62,14 +61,69 @@ public class Movement : MonoBehaviour
                     
         if(Input.GetKey(inputLeft) && Input.GetKey(inputRight) == false)
         {
-            ApplyRotation(sideThrust); // rotate left
+            RotateLeft();   // This will handle movement and particles
         }
-
-        if (Input.GetKey(inputRight) && Input.GetKey(inputLeft) == false)
+        else if (Input.GetKey(inputRight) && Input.GetKey(inputLeft) == false)
         {
-            ApplyRotation(- sideThrust); // rotate right
+            RotateRight();  // ^ Ditto ^
+        }
+        else
+        {
+            StopRotation();
         }
 
+    }
+
+    private void startThrusting()
+    {
+        rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime); // Vector3.up shorthand for 0, 1, 0
+
+        if (!audioPlaying)  // Play audio if it is not currently playing
+        {
+            myAudioSource.PlayOneShot(mainThrusterFX);  // Play Audio
+            audioPlaying = true;
+        }
+
+        if (!boosterParticles.isPlaying) // Visual booster FX
+        {
+            boosterParticles.Play();
+        }
+    }
+
+    private void stopThrusting()    
+    {
+        myAudioSource.Stop();
+        audioPlaying = false;
+
+        boosterParticles.Stop();
+    }
+
+    private void RotateLeft()
+    {
+        ApplyRotation(sideThrust); // rotate left
+
+        // Right thruster on to turn left
+        if (!rightThrustParticles.isPlaying)
+        {
+            rightThrustParticles.Play();
+        }
+    }
+
+    private void RotateRight()
+    {
+        ApplyRotation(-sideThrust); // rotate right
+
+        // Left thruster on to turn right
+        if (!leftThrustParticles.isPlaying)
+        {
+            leftThrustParticles.Play();
+        }
+    }
+
+    private void StopRotation()
+    {
+        rightThrustParticles.Stop();
+        leftThrustParticles.Stop();
     }
 
     void ApplyRotation(float rotationThisFrame)

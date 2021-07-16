@@ -1159,6 +1159,7 @@ GameObject:
   - component: {fileID: 1730941485}
   - component: {fileID: 4044224854585122243}
   - component: {fileID: 28084898}
+  - component: {fileID: 4770314797277681255}
   m_Layer: 0
   m_Name: RocketObject
   m_TagString: Untagged
@@ -1256,7 +1257,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7033851011964022614}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1.2
   m_Drag: 0.25
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -1282,6 +1283,9 @@ MonoBehaviour:
   mainThrust: 1150
   sideThrust: 100
   mainThrusterFX: {fileID: 8300000, guid: 13fe22c89a5df244fac5e1c08a7381eb, type: 3}
+  boosterParticles: {fileID: 5647809947709239572}
+  leftThrustParticles: {fileID: 4859678896871992701}
+  rightThrustParticles: {fileID: 8368357095741377715}
 --- !u!114 &4044224854585122243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,6 +1399,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4770314797277681255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033851011964022614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2731e4882eb2f4fba416d58babf06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipLevelKey: 108
+  godModeKey: 103
 --- !u!1 &7200569576142922186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,7 +1746,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765908706338028246, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: m_Name
-      value: Side Thruster Particles (1)
+      value: Side Thruster Particles Left
       objectReference: {fileID: 0}
     - target: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: m_RootOrder
@@ -1779,6 +1797,11 @@ PrefabInstance:
 --- !u!4 &4746593952621356853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+  m_PrefabInstance: {fileID: 5434787179815957279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4859678896871992701 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
   m_PrefabInstance: {fileID: 5434787179815957279}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5539083071078587496
@@ -1836,11 +1859,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.000015258789
       objectReference: {fileID: 0}
+    - target: {fileID: 198100719057022332, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.34
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
 --- !u!4 &5534724938917182300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4940884351362868, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
+  m_PrefabInstance: {fileID: 5539083071078587496}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5647809947709239572 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198100719057022332, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
   m_PrefabInstance: {fileID: 5539083071078587496}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8384381395309437661
@@ -1900,14 +1932,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
---- !u!4 &8382852453744012821 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
-  m_PrefabInstance: {fileID: 8384381395309437661}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8546393459590443459 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198631066050499358, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
+  m_PrefabInstance: {fileID: 8384381395309437661}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8382852453744012821 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
   m_PrefabInstance: {fileID: 8384381395309437661}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8952965158067131089
@@ -1919,7 +1951,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765908706338028246, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: m_Name
-      value: Side Thruster Particles
+      value: Side Thruster Particles Right
       objectReference: {fileID: 0}
     - target: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
       propertyPath: m_RootOrder
@@ -1970,5 +2002,10 @@ PrefabInstance:
 --- !u!4 &8542244685116065531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+  m_PrefabInstance: {fileID: 8952965158067131089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8368357095741377715 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
   m_PrefabInstance: {fileID: 8952965158067131089}
   m_PrefabAsset: {fileID: 0}

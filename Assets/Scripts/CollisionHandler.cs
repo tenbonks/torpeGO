@@ -5,20 +5,36 @@ public class CollisionHandler : MonoBehaviour
 {
 
     [SerializeField] float loadingDelay;
-
-    [SerializeField] AudioClip winNoise;
+    // Audio vars
+    [SerializeField] AudioClip successNoise;
     [SerializeField] AudioClip crashNoise;
+    AudioSource audioSource;
 
+    // Particle vars
     [SerializeField] ParticleSystem successParticles;
     [SerializeField] ParticleSystem crashParticles;
 
-    AudioSource audioSource;
-    
+    // Cheat key, I wanted to put this on a seperate script but not sure how yet
+    [SerializeField] KeyCode godModeKey;
+    bool godModeActivated = false;
 
     bool isTransitioning = false;
 
     void Start() {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        enableDebugging();
+    }
+
+    private void enableDebugging()
+    {
+        if (Input.GetKey(godModeKey))
+        {
+            godModeActivated = !godModeActivated;   // Change the bool to the opposite value when god mode key pressed
+        }
     }
 
     void OnCollisionEnter(Collision other) 
@@ -44,6 +60,8 @@ public class CollisionHandler : MonoBehaviour
     void StartCrashSequence()   // Disable movement and reload the level
     {
         
+        if (godModeActivated) {return;} // Don't run any crash code if god mode is activated
+
         audioSource.Stop();
         audioSource.PlayOneShot(crashNoise);
         
@@ -60,7 +78,7 @@ public class CollisionHandler : MonoBehaviour
     {
 
         audioSource.Stop();
-        audioSource.PlayOneShot(winNoise);
+        audioSource.PlayOneShot(successNoise);
 
         successParticles.Play();
 

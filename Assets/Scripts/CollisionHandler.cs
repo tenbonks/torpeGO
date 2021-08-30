@@ -16,6 +16,7 @@ public class CollisionHandler : MonoBehaviour
 
     // Cheat key, I wanted to put this on a seperate script but not sure how yet
     [SerializeField] KeyCode godModeKey;
+
     bool godModeActivated = false;
 
     bool isTransitioning = false;
@@ -34,7 +35,9 @@ public class CollisionHandler : MonoBehaviour
         if (Input.GetKey(godModeKey))
         {
             godModeActivated = !godModeActivated;   // Change the bool to the opposite value when god mode key pressed
+            Debug.Log("God Mode " + godModeActivated);
         }
+
     }
 
     void OnCollisionEnter(Collision other) 

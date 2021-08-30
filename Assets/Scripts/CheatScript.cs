@@ -5,7 +5,7 @@ public class CheatScript : MonoBehaviour
 {
 
     [SerializeField] KeyCode skipLevelKey;
-    [SerializeField] KeyCode godModeKey;
+    // [SerializeField] KeyCode godModeKey;
 
     void Update() 
     {

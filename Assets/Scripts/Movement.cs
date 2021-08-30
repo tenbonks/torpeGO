@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
 
     }
 
-    private void startThrusting()
+    void startThrusting()
     {
         rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime); // Vector3.up shorthand for 0, 1, 0
 
@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void stopThrusting()    
+    void stopThrusting()    
     {
         myAudioSource.Stop();
         audioPlaying = false;
@@ -98,7 +98,7 @@ public class Movement : MonoBehaviour
         boosterParticles.Stop();
     }
 
-    private void RotateLeft()
+    void RotateLeft()
     {
         ApplyRotation(sideThrust); // rotate left
 
@@ -109,7 +109,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void RotateRight()
+    void RotateRight()
     {
         ApplyRotation(-sideThrust); // rotate right
 
@@ -120,7 +120,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void StopRotation()
+    void StopRotation()
     {
         rightThrustParticles.Stop();
         leftThrustParticles.Stop();
@@ -128,8 +128,8 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(float rotationThisFrame)
     {
-        rb.freezeRotation = true;   // Freeze rotation, the physics system would cause a bug with rotation when using transform
+        rb.freezeRotation = true;   // Freeze physic applied rotation, causes bugs otherwise
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
-        rb.freezeRotation = false;  // Unfreeze rotation, let the physics system have a say on the situation again
+        rb.freezeRotation = false;  // Unfreeze rotation, let the physics rotation system have a say on the situation again
     }
 }
